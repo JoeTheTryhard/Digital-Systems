@@ -1,6 +1,13 @@
 class DecimalToBinary
 {
-    public static int wholeConvert(int input)
+    public static Double FullConvert(double input)
+    {
+        Double decimalPart = input%1;
+        int wholePart = (int) Math.floor(input);
+        return Double.parseDouble(wholeConvert(wholePart) + decimalConvert(decimalPart));
+         
+    }
+    public static String wholeConvert(int input)
     {
         int remainder;
         String output = "";
@@ -10,31 +17,33 @@ class DecimalToBinary
             output = remainder + output;
             input = input/2;
         }
-        return Integer.parseInt(output);
+        return output;
     
 
 
 
     }
-    public static double decimalConvert(double input)
+    public static String decimalConvert(double input)
     {
-        String output = "";
+        String output = ".";
         int i = 7;
         while(input !=0 && i >= 0)
         {
             input = input * 2;
-            output = output + String.valueOf((int) input);
+            if (input >= 1)
+                {
+                input -= 1;
+                output += "1";
+                }
+            else
+            output += "0";
             i--;
 
         }
-        return Double.parseDouble(output);
+        return output;
     }
     public static void main(String[] Args)
     {
-        Double number = 100.5;
-        Double decimalPart = number%1;
-        int wholePart = (int) Math.floor(number);
-        System.out.println(wholeConvert(wholePart) + decimalConvert(decimalPart));
-
+        System.out.println(FullConvert(10.4959));
     }
 }
